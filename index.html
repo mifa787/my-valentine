@@ -1,134 +1,126 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Будешь моей валентинкой?</title>
 
-<!-- Красивый шрифт -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg1: #ff9fb3;
+            --bg2: #ffd3e0;
+            --accent: #ff4d6d;
+        }
 
-<title>Будешь моей валентинкой?</title>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--bg1), var(--bg2));
+            transition: background 0.5s;
+        }
 
-<style>
+        /* Адаптивная карточка */
+        .container {
+            backdrop-filter: blur(18px);
+            background: rgba(255, 255, 255, 0.25);
+            padding: 40px 20px;
+            border-radius: 30px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+            text-align: center;
+            width: 85%;
+            max-width: 450px;
+            z-index: 5;
+        }
 
-:root{
-    --bg1:#ff9fb3;
-    --bg2:#ffd3e0;
-    --accent:#ff4d6d;
-}
+        h1 {
+            font-size: 2rem;
+            color: #fff;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+        }
 
-body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:'Montserrat', sans-serif;
-    overflow:hidden;
+        /* Контейнер кнопок */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: 100px;
+            position: relative;
+        }
 
-    background: linear-gradient(135deg, var(--bg1), var(--bg2));
-}
+        button {
+            border: none;
+            border-radius: 999px;
+            padding: 16px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, font-size 0.2s;
+            touch-action: none; /* Важно для мобилок */
+        }
 
-/* Стеклянная карточка */
-.container{
-    backdrop-filter: blur(18px);
-    background: rgba(255,255,255,0.25);
-    padding:60px 80px;
-    border-radius:30px;
-    box-shadow:0 25px 60px rgba(0,0,0,0.15);
-    text-align:center;
-}
+        #yesBtn {
+            background: linear-gradient(45deg, #ff4d6d, #ff758f);
+            color: white;
+            box-shadow: 0 10px 25px rgba(255,77,109,.4);
+            z-index: 10;
+        }
 
-/* Заголовок */
-h1{
-    font-size:2.8rem;
-    color:#fff;
-    text-shadow:0 5px 15px rgba(0,0,0,0.15);
-}
+        #noBtn {
+            background: white;
+            color: #ff4d6d;
+            box-shadow: 0 8px 18px rgba(0,0,0,.1);
+            z-index: 9;
+        }
 
-/* Кнопки */
-.buttons{
-    position:relative;
-    width:400px;
-    height:220px;
-    margin-top:20px;
-}
+        /* Состояния */
+        .dark-mode {
+            background: linear-gradient(135deg, #141414, #2c2c2c) !important;
+        }
 
-button{
-    position:absolute;
-    border:none;
-    border-radius:999px;
-    padding:16px 34px;
-    font-size:1.2rem;
-    cursor:pointer;
-    transition:.25s;
-}
+        .glitch {
+            animation: glitch .2s infinite;
+        }
 
-/* Да */
-#yesBtn{
-    background: linear-gradient(45deg,#ff4d6d,#ff758f);
-    color:white;
-    left:75%;
-    box-shadow:0 10px 25px rgba(255,77,109,.4);
-}
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
 
-#yesBtn:hover{
-    transform:scale(1.08);
-}
+        .heart {
+            position: absolute;
+            bottom: -20px;
+            pointer-events: none;
+            animation: float 6s linear infinite;
+            opacity: .6;
+        }
 
-/* Нет */
-#noBtn{
-    background:white;
-    color:#ff4d6d;
-    left:100%;
-    box-shadow:0 8px 18px rgba(0,0,0,.1);
-}
+        @keyframes float {
+            to { transform: translateY(-120vh); }
+        }
 
-/* Ночной режим */
-.dark-mode{
-    background: linear-gradient(135deg,#141414,#2c2c2c);
-}
-
-/* Глитч */
-.glitch{
-    animation:glitch .2s infinite;
-}
-
-@keyframes glitch{
-    0%{transform:translate(0);}
-    20%{transform:translate(-5px,5px);}
-    40%{transform:translate(-5px,-5px);}
-    60%{transform:translate(5px,5px);}
-    80%{transform:translate(5px,-5px);}
-    100%{transform:translate(0);}
-}
-
-/* Летающие сердечки */
-.heart{
-    position:absolute;
-    bottom:-20px;
-    font-size:20px;
-    animation:float 6s linear infinite;
-    opacity:.6;
-}
-
-@keyframes float{
-    from{
-        transform:translateY(0);
-    }
-    to{
-        transform:translateY(-120vh);
-    }
-}
-
-</style>
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; }
+            button { padding: 12px 24px; font-size: 1rem; }
+        }
+    </style>
 </head>
 
 <body id="body">
 
-<div class="container">
+<div class="container" id="mainCard">
     <h1 id="question">Ты будешь моей валентинкой? ❤️</h1>
-
     <div class="buttons">
         <button id="yesBtn">ДА</button>
         <button id="noBtn">Нет</button>
@@ -136,80 +128,100 @@ button{
 </div>
 
 <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const body = document.getElementById('body');
+    const question = document.getElementById('question');
 
-const noBtn = document.getElementById('noBtn');
-const yesBtn = document.getElementById('yesBtn');
-const body = document.getElementById('body');
+    let attempt = 0;
+    const phrases = [
+        "Точно?", "Подумай еще!", "Я обижусь!", 
+        "Кнопка сломалась?", "Хватит тыкать!", "ERROR 404", "ЖМИ ДА!"
+    ];
 
-let attempt = 0;
+    // Летающие сердечки
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }, 450);
 
-const phrases = [
-"Точно?", "Может передумаешь?",
-"Я обижусь!", "Кнопка сломалась?", "Хватит тыкать!",
-"ERROR 404", "ДА НАЖМИ ТЫ ДА!"
-];
-
-// сердечки
-setInterval(()=>{
-    const heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="💖";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(Math.random()*20+10)+"px";
-
-    document.body.appendChild(heart);
-
-    setTimeout(()=>heart.remove(),6000);
-},400);
-
-// убегание
-noBtn.addEventListener('mouseover', () => {
-
+    const moveButton = (e) => {
+    if(e) e.preventDefault();
     attempt++;
 
-    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth) * 0.5;
-    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight) * 0.5;
+    const padding = 20;
+    // Получаем координаты и размеры карточки, чтобы не прыгать на кнопку "ДА"
+    const cardRect = document.getElementById('mainCard').getBoundingClientRect();
 
+    let x, y;
+    let isOverlapping = true;
+
+    // Цикл подбора координат, чтобы кнопка не появилась поверх карточки с "ДА"
+    while (isOverlapping) {
+        x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding) * 0.5;
+        y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding) * 0.5;
+
+        // Проверяем, не попадают ли новые координаты в область центральной карточки
+        const buffer = 50; // Дополнительный отступ от карточки
+        if (
+            x < cardRect.left - buffer || 
+            x > cardRect.right + buffer || 
+            y < cardRect.top - buffer || 
+            y > cardRect.bottom + buffer
+        ) {
+            isOverlapping = false;
+        }
+        
+        // Предохранитель, чтобы цикл не завис, если экран слишком маленький
+        if (attempt < 2) break; 
+    }
+
+    noBtn.style.position = 'fixed';
     noBtn.style.left = `${x}px`;
     noBtn.style.top = `${y}px`;
+    noBtn.style.zIndex = "1"; // "Нет" всегда снизу
 
     noBtn.innerText = phrases[Math.min(attempt, phrases.length - 1)];
 
-    const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-    yesBtn.style.fontSize = `${currentSize + 10}px`;
-    yesBtn.style.padding = `${parseFloat(yesBtn.style.padding || 16) + 5}px`;
+    // Увеличение кнопки "ДА" через масштаб
+    const currentScale = 1 + (attempt * 0.1);
+    yesBtn.style.transform = `scale(${currentScale})`;
+    yesBtn.style.zIndex = "100"; // "Да" всегда сверху
 
     if (attempt > 5) body.classList.add('dark-mode');
     if (attempt > 8) body.classList.add('glitch');
+};
+    // Слушатели для ПК и Мобилок
+    noBtn.addEventListener('mouseover', moveButton);
+    noBtn.addEventListener('touchstart', moveButton);
 
-    if (attempt % 3 === 0){
-        let fake = noBtn.cloneNode(true);
-        fake.style.opacity="0.4";
-        document.body.appendChild(fake);
-    }
-
-    if (attempt > 3){
-        const msg = new SpeechSynthesisUtterance("Нажми да");
-        msg.lang='ru-RU';
-        window.speechSynthesis.speak(msg);
-    }
-});
-
-// финал
-yesBtn.addEventListener('click', () => {
-    window.speechSynthesis.cancel();
-
-    document.body.innerHTML = `
-        <h1 style="font-size:5rem;color:white;">УРАААА! 😍</h1>
-        <p style="font-size:1.5rem;color:white;">Я знал, что ты согласишься!</p>
-        <div style="font-size:100px;">💖✨🎈</div>
-    `;
-
-    body.classList.remove('glitch','dark-mode');
-    body.style.background="linear-gradient(45deg,#ff4d6d,#ff758f)";
-});
-
+    // Финал
+    yesBtn.addEventListener('click', () => {
+        window.speechSynthesis.cancel();
+        document.body.innerHTML = `
+            <div style="text-align:center; color:white; animation: scaleIn 0.5s ease-out;">
+                <h1 style="font-size:4rem; margin:0;">УРААА! 😍</h1>
+                <p style="font-size:1.5rem;">Я не сомневался!</p>
+                <div style="font-size:80px; margin-top:20px;">💖✨🎈</div>
+            </div>
+        `;
+        body.classList.remove('glitch', 'dark-mode');
+        body.style.background = "linear-gradient(45deg, #ff4d6d, #ff758f)";
+    });
 </script>
+
+<style>
+    /* Анимация появления финала */
+    @keyframes scaleIn {
+        from { transform: scale(0); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+</style>
 
 </body>
 </html>
