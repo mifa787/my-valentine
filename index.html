@@ -120,7 +120,7 @@
 <body id="body">
 
 <div class="container" id="mainCard">
-    <h1 id="question">Ты будешь моей валентинкой? ❤️</h1>
+    <h1 id="question">Айлиночка, ты будешь моей валентинкой? ❤️</h1>
     <div class="buttons">
         <button id="yesBtn">ДА</button>
         <button id="noBtn">Нет</button>
@@ -193,8 +193,21 @@
     yesBtn.style.transform = `scale(${currentScale})`;
     yesBtn.style.zIndex = "100"; // "Да" всегда сверху
 
+    if (attempt > 3 && !window.speechSynthesis.speaking) {
+        // Останавливаем прошлую фразу, перед тем как говорить новую
+        window.speechSynthesis.cancel(); 
+        
+        const msg = new SpeechSynthesisUtterance("Нажми да");
+        msg.lang = 'ru-RU';
+        msg.pitch = 1.2; // Можно сделать голос чуть мультяшнее
+        msg.rate = 1.0;
+        window.speechSynthesis.speak(msg);
+    }
+
+
     if (attempt > 5) body.classList.add('dark-mode');
     if (attempt > 8) body.classList.add('glitch');
+
 };
     // Слушатели для ПК и Мобилок
     noBtn.addEventListener('mouseover', moveButton);
@@ -206,7 +219,8 @@
         document.body.innerHTML = `
             <div style="text-align:center; color:white; animation: scaleIn 0.5s ease-out;">
                 <h1 style="font-size:4rem; margin:0;">УРААА! 😍</h1>
-                <p style="font-size:1.5rem;">Я не сомневался!</p>
+                <p style="font-size:1.5rem;">Я не сомневался! С днем всех влюбленных, моя неповторимая!</p>
+                <p style="font-size:1.5rem;"> От твоего любящего программиста Миши</p>
                 <div style="font-size:80px; margin-top:20px;">💖✨🎈</div>
             </div>
         `;
